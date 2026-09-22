@@ -30,7 +30,7 @@ int main() {
         printf("Enter Process Name: ");
         scanf("%s", p[i].name);
 
-        printf("Enter Priority (1 = Highest): ");
+        printf("Enter Priority : ");
         scanf("%d", &p[i].priority);
 
         printf("Enter State (New/Ready/Running/Waiting/Terminated): ");
