@@ -17,17 +17,17 @@ int main() {
     char newState[20];
 
     // Enter number of processes
-    printf("Enter number of customer support tickets: ");
+    printf("Enter number of processes: ");
     scanf("%d", &n);
 
-    // Enter process/ticket details
+    // Enter process details
     for (i = 0; i < n; i++) {
-        printf("\nEnter details of Ticket %d\n", i + 1);
+        printf("\nEnter details of Process %d\n", i + 1);
 
-        printf("Enter Ticket ID: ");
+        printf("Enter PID: ");
         scanf("%d", &p[i].pid);
 
-        printf("Enter Issue: ");
+        printf("Enter Process Name: ");
         scanf("%s", p[i].name);
 
         printf("Enter Priority (1 = Highest): ");
@@ -40,13 +40,13 @@ int main() {
     // Menu
     do {
         printf("\n============================================\n");
-        printf("     CUSTOMER SUPPORT TICKET SYSTEM\n");
+        printf("          PROCESS MANAGEMENT SYSTEM\n");
         printf("============================================\n");
-        printf("1. Display all ticket details\n");
-        printf("2. Display highest priority ticket\n");
-        printf("3. Display tickets in a particular state\n");
-        printf("4. Change state of a selected ticket\n");
-        printf("5. Display current state of all tickets\n");
+        printf("1. Display all process details\n");
+        printf("2. Display process with highest priority\n");
+        printf("3. Display processes in a particular state\n");
+        printf("4. Change state of a selected process\n");
+        printf("5. Display current state of all processes\n");
         printf("6. Exit\n");
         printf("============================================\n");
 
@@ -55,13 +55,13 @@ int main() {
 
         switch (choice) {
 
-            // 1. Display all ticket details
+            // 1. Display all process details
             case 1:
-                printf("\n------------- ALL TICKET DETAILS -------------\n");
-                printf("Ticket ID\tIssue\t\tPriority\tState\n");
+                printf("\n------------- ALL PROCESS DETAILS -------------\n");
+                printf("PID\tName\t\tPriority\tState\n");
 
                 for (i = 0; i < n; i++) {
-                    printf("%d\t\t%-15s%d\t\t%s\n",
+                    printf("%d\t%-15s%d\t\t%s\n",
                            p[i].pid,
                            p[i].name,
                            p[i].priority,
@@ -70,40 +70,40 @@ int main() {
 
                 break;
 
-            // 2. Display highest priority ticket
+            // 2. Display process with highest priority
             case 2: {
                 int highest = 0;
 
-                // Lower number = higher priority
+                // Lower number means higher priority
                 for (i = 1; i < n; i++) {
                     if (p[i].priority < p[highest].priority) {
                         highest = i;
                     }
                 }
 
-                printf("\n---------- HIGHEST PRIORITY TICKET ----------\n");
-                printf("Ticket ID : %d\n", p[highest].pid);
-                printf("Issue     : %s\n", p[highest].name);
-                printf("Priority  : %d\n", p[highest].priority);
-                printf("State     : %s\n", p[highest].state);
+                printf("\n---------- HIGHEST PRIORITY PROCESS ----------\n");
+                printf("PID      : %d\n", p[highest].pid);
+                printf("Name     : %s\n", p[highest].name);
+                printf("Priority : %d\n", p[highest].priority);
+                printf("State    : %s\n", p[highest].state);
 
                 break;
             }
 
-            // 3. Display tickets in a particular state
+            // 3. Display processes in a particular state
             case 3:
                 printf("\nEnter state to search: ");
                 scanf("%s", searchState);
 
                 found = 0;
 
-                printf("\n---------- TICKETS IN %s STATE ----------\n",
+                printf("\n---------- PROCESSES IN %s STATE ----------\n",
                        searchState);
 
                 for (i = 0; i < n; i++) {
                     if (strcmp(p[i].state, searchState) == 0) {
 
-                        printf("Ticket ID: %d\tIssue: %s\tPriority: %d\n",
+                        printf("PID: %d\tName: %s\tPriority: %d\n",
                                p[i].pid,
                                p[i].name,
                                p[i].priority);
@@ -113,14 +113,14 @@ int main() {
                 }
 
                 if (found == 0) {
-                    printf("No tickets found in this state.\n");
+                    printf("No processes found in this state.\n");
                 }
 
                 break;
 
-            // 4. Change state of selected ticket
+            // 4. Change state of selected process
             case 4:
-                printf("\nEnter Ticket ID: ");
+                printf("\nEnter PID of the process: ");
                 scanf("%d", &pid);
 
                 found = 0;
@@ -137,8 +137,8 @@ int main() {
                         strcpy(p[i].state, newState);
 
                         printf("\nState changed successfully!\n");
-                        printf("Ticket ID: %d\n", p[i].pid);
-                        printf("New State: %s\n", p[i].state);
+                        printf("PID       : %d\n", p[i].pid);
+                        printf("New State : %s\n", p[i].state);
 
                         found = 1;
                         break;
@@ -146,18 +146,18 @@ int main() {
                 }
 
                 if (found == 0) {
-                    printf("Ticket with ID %d not found.\n", pid);
+                    printf("Process with PID %d not found.\n", pid);
                 }
 
                 break;
 
-            // 5. Display current state of all tickets
+            // 5. Display current state of all processes
             case 5:
-                printf("\n---------- CURRENT STATE OF ALL TICKETS ----------\n");
-                printf("Ticket ID\tIssue\t\tState\n");
+                printf("\n---------- CURRENT STATE OF ALL PROCESSES ----------\n");
+                printf("PID\tName\t\tState\n");
 
                 for (i = 0; i < n; i++) {
-                    printf("%d\t\t%-15s%s\n",
+                    printf("%d\t%-15s%s\n",
                            p[i].pid,
                            p[i].name,
                            p[i].state);
@@ -167,7 +167,7 @@ int main() {
 
             // 6. Exit
             case 6:
-                printf("\nExiting Customer Support Ticket System...\n");
+                printf("\nExiting Process Management System...\n");
                 break;
 
             default:
